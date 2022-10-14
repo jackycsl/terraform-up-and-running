@@ -3,16 +3,18 @@
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "db_remote_state_bucket" {
-  description = "The name of the S3 bucket for the database's remote state"
-  type        = string
-  # default     = "terraform-up-and-running-state-jackycsl"
-}
+variable "mysql_config" {
+  description = "The config for the MySQL DB"
 
-variable "db_remote_state_key" {
-  description = "The path for the database's remote state in S3"
-  type        = string
-  # default     = "stage/data-stores/mysql/terraform.tfstate"
+  type = object({
+    address = string
+    port    = number
+  })
+
+  default = {
+    address = "mock-mysql-address"
+    port    = 12345
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -29,5 +31,5 @@ variable "server_text" {
 variable "environment" {
   description = "The name of the environment we're deploying to"
   type        = string
-  default     = "stage"
+  default     = "example"
 }
